@@ -1629,6 +1629,7 @@
         let notes = []; // 存储所有动态
         let userHistorySearchTerm = ''; // 历史记录搜索词
         let postSearchTerm = ''; // 全局动态搜索词
+        let welcomeShown = false; // 记录是否已显示欢迎语（新增）
 
         // 工具界面控制函数
         function showToolInterface() {
@@ -2497,8 +2498,11 @@
                 updateSignatureOwner();
                 document.getElementById('status').innerText = "✨ 空间已刷新";
                 
-                // 数据加载完成后显示欢迎标语
-                showWelcomeBanner();
+                // 数据加载完成后显示欢迎标语（仅首次）
+                if (!welcomeShown) {
+                    showWelcomeBanner();
+                    welcomeShown = true;
+                }
             } catch (e) { }
             setTimeout(() => icon.classList.remove('rotating'), 500);
         }
